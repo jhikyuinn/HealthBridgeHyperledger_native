@@ -1,13 +1,13 @@
 import { StyleSheet,Text, View ,Image, ImageBackground} from 'react-native';
 import AuroraButton from '../components/AuroraButton';
 
-function Main({navigation}) {
+function Main({route,navigation}) {
 
     const WhoSignIn=(category)=>{
-        console.log(category)
-        navigation.navigate('SignIn')
+        navigation.navigate('SignIn',{category:category})
     
     }
+
     return (
     <>
       <View style={styles.firstcontainer}>
