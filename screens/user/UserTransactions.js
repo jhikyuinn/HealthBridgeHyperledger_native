@@ -1,12 +1,12 @@
 import { Text, View } from 'react-native';
 
-function Records({route,navigation}) {
+function UserTransaction({navigation}) {
   
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Records</Text>
+        <Text>Transaction records</Text>
       </View>
     );
   }
   
-  export default Records;
+  export default UserTransaction;

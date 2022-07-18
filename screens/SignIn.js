@@ -17,7 +17,15 @@ import Loader from '../components/Loader';
       const [password,onChangePassword] = useState('');
       const [loader,setLoader] = useState(false);
 
-      console.log(category)
+      const WhoSigned=(category,id)=>{
+        if(category=='owner'){
+            navigation.navigate('OwnerMenu',{category:category, id:id})
+          }else if(category=='user'){
+              navigation.navigate('UserMenu',{category:category,id:id})
+          }else{
+              navigation.navigate('SourcesMenu',{category:category,id:id})
+          }
+      }
       const validate = ()=>{
           if(id == '' && password == ''){
               showErr(true,true,"Unable to sign in \n please fill in all fields");
@@ -26,13 +34,7 @@ import Loader from '../components/Loader';
           }else if(password == ''){
               showErr(true,true,"Unable to sign in \n please enter your password");
           }else{
-            if(category=='user'){
-              navigation.navigate('Menu',{category:category})
-            }else if(category=='owner'){
-                navigation.navigate('Menu',{category:category})
-            }else{
-                navigation.navigate('Menu',{category:category})
-            }
+            WhoSigned(category,id)
           }
 
       }
