@@ -91,7 +91,7 @@ const SignUp = ({route,navigation})=>{
                                 <TextInput name="password" value={usercreate.password} onChange={onChangeHandler} secureTextEntry={true} style={styles.otheritem} placeholderTextColor="#fff" placeholder="password" />
                                 <TextInput name="confirmPassword" value={usercreate.confirmPassword} onChange={onChangeHandler} secureTextEntry={true} style={styles.otheritem} placeholderTextColor="#fff" placeholder="confirmPassword" />  
                             </View>
-                            <AuroraButton buttonFunction={()=>validate()} bgcolor="white" text="Create Account" color={"black"} outline={false}/>
+                            <AuroraButton buttonFunction={()=>validate()} widthsize="80%" heightsize="8%" bgcolor="white" text="Create Account" color={"black"} outline={false}/>
                     </View>
                 </ScrollView>
             </View>

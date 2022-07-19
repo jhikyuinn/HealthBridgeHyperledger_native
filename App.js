@@ -8,6 +8,7 @@ import Main from './screens/Main';
 import OwnerMenu from './screens/owner/OwnerMenu';
 import UserMenu from './screens/user/UserMenu';
 import SourcesMenu from './screens/sources/SourcesMenu';
+import OwnerRecordsDetails from './screens/owner/OwnerRecordsDetails';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -16,20 +17,51 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Main" component={Main}></Stack.Screen>
+      <Stack.Screen name="Main" component={Main} ></Stack.Screen>
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Owner Records Details" component={OwnerRecordsDetails}/>
       <Stack.Screen
           name="OwnerMenu"
           component={OwnerMenu}
+          options={{
+            title: 'Health Bridge',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
         />
         <Stack.Screen
           name="UserMenu"
           component={UserMenu}
+          options={{
+            title: 'Health Bridge',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
         />
         <Stack.Screen
           name="SourcesMenu"
           component={SourcesMenu}
+          options={{
+            title: 'Health Bridge',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
         />
       
       </Stack.Navigator>

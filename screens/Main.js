@@ -18,9 +18,9 @@ function Main({route,navigation}) {
       
       <View style={styles.secondcontainer}>
         <Text style={styles.secondtext}>Continue as</Text>
-        <AuroraButton bgcolor="rgb(134, 193, 217)" text="PHR Owner" color={"white"} fontSize={20} outline={false} buttonFunction={()=>WhoSignIn("owner")}/>
-        <AuroraButton bgcolor="rgb(134, 193, 217)" text="PHR User" color={"white"} fontSize={20} outline={false} buttonFunction={()=>WhoSignIn("user")}/>
-        <AuroraButton bgcolor="rgb(134, 193, 217)" text="PHR Sources" color={"white"} fontSize={20} outline={false} buttonFunction={()=>WhoSignIn("sources")}/>
+        <AuroraButton width="80%" height="20%" bgcolor="rgb(134, 193, 217)" text="PHR Owner" color={"white"} fontSize={20} outline={false} buttonFunction={()=>WhoSignIn("owner")}/>
+        <AuroraButton width="80%" height="20%" bgcolor="rgb(134, 193, 217)" text="PHR User" color={"white"} fontSize={20} outline={false} buttonFunction={()=>WhoSignIn("user")}/>
+        <AuroraButton width="80%" height="20%" bgcolor="rgb(134, 193, 217)" text="PHR Sources" color={"white"} fontSize={20} outline={false} buttonFunction={()=>WhoSignIn("sources")}/>
       </View>
     </>
     );
@@ -32,7 +32,7 @@ function Main({route,navigation}) {
     firstcontainer: {
         resizeMode:"stretch",
         flex: 3,
-        flexDirection: 'row', // 혹은 'column'
+        flexDirection: 'row',
         backgroundColor:"white"
     },
     maintext:{
@@ -50,12 +50,12 @@ function Main({route,navigation}) {
     },
     secondcontainer:{
         backgroundColor:"white", 
-        flex: 2, 
+        flex: 3, 
         justifyContent: 'center', 
         alignItems: 'center'
     },
     secondtext:{
-        fontSize:18,
+        fontSize:20,
         color:"rgb(134, 193, 217)",
         fontWeight:"bold"
     }

@@ -1,20 +1,16 @@
 import React, {useEffect,useState} from 'react';
-import { Text, View } from 'react-native';
+import AuroraButton from '../../components/AuroraButton';
+import axios from 'axios'
+import { Text, View , StyleSheet,ScrollView} from 'react-native';
 
 function SourcesRecords({user, record}) {
 
-  async function getRecordsview(){
-    await axios.get(`http://2key3.247.24key.226:8key8key/fhir/Patient/${item.resource.id}`).then((res) => {
-       console.log(res)          
-
-      })
-
-    }
+  
  
     return (
-      <View >
+      <ScrollView >
        {record.map((item,index)=>(
-        <View >
+        <View style={styles.input} key={item.resource.id}>
         <Text>
           PID: {item.resource.id}
         </Text>
@@ -30,16 +26,26 @@ function SourcesRecords({user, record}) {
         <Text>
           Create Time: {item.resource.extension[5] ? item.resource.extension[5].valueString : <></>}
         </Text>
-        <Text className='my_view' onClick={() => getRecordsview()} style={{marginLeft:"90%"}} variant="outline-success">
-          View
-        </Text>
+        <AuroraButton text="View"  width="20%" height="25%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
       </View>
           
        ))}
       
       
-    </View>
+    </ScrollView>
     );
   }
   
   export default SourcesRecords;
+
+  const styles = StyleSheet.create({
+    input: {
+      marginTop:20,
+      height: 160,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      borderRadius:10,
+      backgroundColor:"#fff",
+    },
+  });

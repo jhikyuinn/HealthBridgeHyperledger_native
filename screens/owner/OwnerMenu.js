@@ -21,8 +21,8 @@ function OwnerMenu({route}){
         let temp = [];
         await axios.get(`http://203.247.240.226:22650/api/query/${id}`).then((res) => {
         setUser(res.data)
-    })
-        await axios.get(`http://203.247.240.226:8080/fhir/Patient?phone=010-9385-6525&name=jhikyuinn`).then((res) => {
+        console.log(res.data)
+        axios.get(`http://203.247.240.226:8080/fhir/Patient?phone=${res.data.phonenumber}&name=${res.data.patientName}`).then((res) => {
           for(const item of res.data.entry) {
             if(item.resource.meta.tag  == undefined) {
                 temp.push(item);
@@ -31,6 +31,7 @@ function OwnerMenu({route}){
           console.log(temp)
           setRecord(temp);
         })
+      })
     }
 
     const Tab = createBottomTabNavigator();

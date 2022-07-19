@@ -1,12 +1,14 @@
 import React, {useEffect,useState} from 'react';
-import { Text, View , StyleSheet,ScrollView} from 'react-native';
+import AuroraButton from '../../components/AuroraButton';
+import { Text, View, StyleSheet, ScrollView} from 'react-native';
 
-function UserRecords({user, record}) {
+function UserRecords({record}) {
+
  
     return (
       <ScrollView >
-       {record.map((item,index)=>(
-        <View style={styles.input}>
+       {record.map((item)=> (
+        <View style={styles.input} key={item.resource.id}>
         <Text>
           PID: {item.resource.id}
         </Text>
@@ -19,9 +21,7 @@ function UserRecords({user, record}) {
         <Text>
           Create Time: {item.resource.extension[5] ? item.resource.extension[5].valueString : <></>}
         </Text>
-        <Text className='my_view' onClick={() => getRecordsview()} style={{marginLeft:"90%"}} variant="outline-success">
-          View
-        </Text>
+        <AuroraButton text="View"  width="20%" height="25%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
       </View>
           
        ))}
@@ -40,5 +40,8 @@ function UserRecords({user, record}) {
       margin: 12,
       borderWidth: 1,
       padding: 10,
+      borderRadius:10,
+      backgroundColor:"#fff",
     },
+    
   });

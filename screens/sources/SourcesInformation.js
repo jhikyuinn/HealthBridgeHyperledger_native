@@ -14,7 +14,7 @@ function SourcesInformation({user,navigation}) {
         <Text>Name: {user.patientName}</Text>
         <Text>Phone Number: {user.phonenumber}</Text>
         <Text>Account Balance: {user.checkingBalance}</Text>
-        <AuroraButton buttonFunction={()=>SignOut()} bgcolor="white" text="Sign Out" color={"black"} outline={false}/>
+        <AuroraButton buttonFunction={()=>SignOut()} width="80%" height="10%"  bgcolor="rgb(134, 193, 217)" text="Sign Out" color={"black"} outline={false}/>
       </View>
     );
   }

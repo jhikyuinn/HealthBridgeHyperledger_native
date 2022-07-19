@@ -24,7 +24,7 @@ const PopUp = (props)=>{
                 <Text style={{textAlign:'center',marginTop:10}}>
                     {props.text}
                 </Text>
-                <AuroraButton buttonFunction={()=>buttonClicked()} bgcolor="black" text="Okay" color={"white"} outline={false}/>
+                <AuroraButton buttonFunction={()=>buttonClicked()} widthsize="80%" heightsize="8%" bgcolor="black" text="Okay" color={"white"} outline={false}/>
             </View>
         </>
     )

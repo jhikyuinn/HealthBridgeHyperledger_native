@@ -1,21 +1,27 @@
 import React, {useEffect,useState} from 'react';
-import { Text, View , StyleSheet} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import AuroraButton from '../../components/AuroraButton';
+import axios from 'axios';
+import { Text, View , StyleSheet, ScrollView} from 'react-native';
 
-function Records({user, record}) {
+function Records({user, record,navigation}) {
 
-  async function getRecordsview(){
-    await axios.get(`http://203.247.240.226:8080/fhir/Patient/${item.resource.id}`).then((res) => {
-       console.log(res)          
-
+  async function getRecordsview(id){
+    let temp = [];
+    await axios.get(`http://203.247.240.226:8080/fhir/Patient/${id}`).then((res) => {
+       console.log(res.data) 
+       sendRecordDEtails(user,res.data)       
       })
-
+      
     }
+    function sendRecordDEtails(user,data){
+      navigation.navigate("Owner Records Details",{user:user,data:data})
+    }
+   
  
     return (
       <ScrollView>
        {record.map((item,index)=>(
-        <View style={styles.input} >
+        <View style={styles.input} key={item.resource.id} >
         <Text>
           PID: {item.resource.id}
         </Text>
@@ -31,12 +37,10 @@ function Records({user, record}) {
         <Text>
           Create Time: {item.resource.extension[5] ? item.resource.extension[5].valueString : <></>}
         </Text>
-        <Text className='my_view' onClick={() => getRecordsview()} style={{marginLeft:"90%"}} variant="outline-success">
-          View
-        </Text>
-      </View>
-          
-       ))}
+        <AuroraButton text="View" buttonFunction={() => getRecordsview(item.resource.id)} width="20%" height="25%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
+        </View>
+          ))
+       }  
       
       
       </ScrollView>
@@ -47,9 +51,10 @@ function Records({user, record}) {
 
   const styles = StyleSheet.create({
     input: {
+      fontSize:25,
       marginTop:20,
-      height: 130,
-      margin: 10,
+      height: 160,
+      margin: 12,
       borderWidth: 1,
       padding: 10,
       borderRadius:10,

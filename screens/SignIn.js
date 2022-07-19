@@ -68,8 +68,8 @@ import Loader from '../components/Loader';
                           <TextInput value={id} onChangeText={text => onChangeid(text)} style={{height:52,width:'100%',color:'white',borderRadius:10,borderWidth:1,borderColor:'white',paddingLeft:10}} placeholderTextColor="#fff" placeholder="id" />  
                           <TextInput value={password} onChangeText={text => onChangePassword(text)} secureTextEntry={true} style={{height:52,width:'100%',color:'white',borderRadius:10,marginTop:10,borderWidth:1,borderColor:'white',paddingLeft:10}} placeholderTextColor="#fff" placeholder="Password" />  
                       </View>
-                      <AuroraButton buttonFunction={()=>validate()} bgcolor="white" text="Sign in" color={"black"} outline={false}/>
-                      <AuroraButton buttonFunction={()=>WhoSignUp()} bgcolor="white" text="Sign up" color={"black"} outline={false}/>
+                      <AuroraButton buttonFunction={()=>validate()} width="80%" height="10%" bgcolor="white" fontSize={15} text="Sign in" color={"black"} outline={false}/>
+                      <AuroraButton buttonFunction={()=>WhoSignUp()} width="80%" height="10%" bgcolor="white" fontSize={15} text="Sign up" color={"black"} outline={false}/>
                   </View>
                   </ScrollView>
               </View>

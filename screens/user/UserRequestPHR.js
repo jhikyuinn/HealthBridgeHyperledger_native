@@ -1,10 +1,13 @@
 import React, {useEffect,useState} from 'react';
 import { Text, View,Button, StyleSheet} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import axios from 'axios';
+import AuroraButton from '../../components/AuroraButton';
+import UserRequestItem from './UserRequestItem'
 
 function UserRequestPHR({user, record}) {
     const [request, setRequest] = useState({
-        req: "",
+        req:undefined,
     });
     const [resultList, setResultList] = useState();
 
@@ -31,14 +34,18 @@ function UserRequestPHR({user, record}) {
         console.log("3")
         getRequest();
     }
-
-
  
     return (
-    <View >
-    <TextInput  style={styles.input} type="text" placeholder="Search Symptom " name="req" value={request.req} onChange={changeHandler}/>
-
-      <Button title="Search" onClick={onSearchHandler}></Button>
+    <View>
+        <View >
+            <TextInput  style={styles.input} type="text" placeholder="Search Symptom " name="request.req" value={request.req} onChange={changeHandler}/>
+            <AuroraButton buttonFunction={()=>onSearchHandler()} bgcolor="white" text="Search" color={"black"} outline={false}/>
+        </View>
+        <View>
+        {resultList && resultList.map((item, index) => {
+            return <UserRequestItem item={item} key={index} />
+        })}
+        </View>
     </View>
     );
   }
@@ -47,11 +54,11 @@ function UserRequestPHR({user, record}) {
 
   const styles = StyleSheet.create({
     input: {
-      marginTop:40,
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-    },
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+      },
   });
+
   
