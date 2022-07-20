@@ -1,6 +1,8 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Header } from 'react-native-elements';
 
 import UserRecords from "./UserRecords"
 import UserTransactions from "./UserTransactions"
@@ -37,12 +39,44 @@ function UserMenu({route}){
     console.log(user)
     console.log(record)
     return(
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
-          <Tab.Screen name="User Transaction records" children={({navigation})=><UserTransactions user={user} navigation={navigation}/>} />
-          <Tab.Screen name="User Request PHR" children={({navigation})=><UserRequestPHR user={user} record={record} navigation={navigation}/>} />
-          <Tab.Screen name="User Records" children={({navigation})=><UserRecords user={user} record={record} navigation={navigation}/>} />
-          <Tab.Screen name="User Information" children={({navigation})=><UserInformation user={user} navigation={navigation}/>}  />
+      <>
+      <Header
+      backgroundColor='rgb(134, 193, 217)'
+      leftComponent={{text:"HealthBridge",style:{width:200,fontSize:25,fontWeight: 'bold'}}}
+      rightComponent={{ icon:"notifications" }}
+      />
+
+      <Tab.Navigator screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Transactions') {
+            iconName = focused
+              ? 'ios-clipboard-sharp'
+              : 'ios-clipboard-sharp';
+              color="rgb(134, 193, 217)"
+          } else if (route.name === 'Records') {
+            iconName = focused ? 'ios-medkit' : 'ios-medkit-outline';
+            color="rgb(134, 193, 217)"
+          }
+          else if (route.name === 'Request PHR') {
+            iconName = focused ? 'ios-document-attach' : 'ios-document-attach-outline';
+            color="rgb(134, 193, 217)"
+          }
+          else if (route.name === 'Information') {
+            iconName = focused ? 'ios-person-circle' : 'ios-person-circle-outline';
+            color="rgb(134, 193, 217)"
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        }
+      }
+        )}>
+          <Tab.Screen name="Records" children={({navigation})=><UserRecords user={user} record={record} navigation={navigation}/>} />
+          <Tab.Screen name="Transactions" children={({navigation})=><UserTransactions user={user} navigation={navigation}/>} />
+          <Tab.Screen name="Request PHR" children={({navigation})=><UserRequestPHR user={user} record={record} navigation={navigation}/>} />
+          <Tab.Screen name="Information" children={({navigation})=><UserInformation user={user} navigation={navigation}/>}  />
       </Tab.Navigator>
+      </>
     );
 }
 

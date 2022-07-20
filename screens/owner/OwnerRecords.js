@@ -3,6 +3,7 @@ import AuroraButton from '../../components/AuroraButton';
 import axios from 'axios';
 import { Text, View , StyleSheet, ScrollView} from 'react-native';
 
+
 function Records({user, record,navigation}) {
 
   async function getRecordsview(id){
@@ -19,6 +20,8 @@ function Records({user, record,navigation}) {
    
  
     return (
+      <View>
+      
       <ScrollView>
        {record.map((item,index)=>(
         <View style={styles.input} key={item.resource.id} >
@@ -44,6 +47,7 @@ function Records({user, record,navigation}) {
       
       
       </ScrollView>
+      </View>
     );
   }
   
