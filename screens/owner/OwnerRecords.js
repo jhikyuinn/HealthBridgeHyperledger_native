@@ -4,17 +4,17 @@ import axios from 'axios';
 import { Text, View , StyleSheet, ScrollView} from 'react-native';
 
 
-function Records({user, record,navigation}) {
+function OwnerRecords({user, record,navigation}) {
 
   async function getRecordsview(id){
     let temp = [];
     await axios.get(`http://203.247.240.226:8080/fhir/Patient/${id}`).then((res) => {
        console.log(res.data) 
-       sendRecordDEtails(user,res.data)       
+       sendRecordDetails(user,res.data)       
       })
       
     }
-    function sendRecordDEtails(user,data){
+    function sendRecordDetails(user,data){
       navigation.navigate("Owner Records Details",{user:user,data:data})
     }
    
@@ -51,7 +51,7 @@ function Records({user, record,navigation}) {
     );
   }
   
-  export default Records;
+  export default OwnerRecords;
 
   const styles = StyleSheet.create({
     input: {

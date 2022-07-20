@@ -10,7 +10,7 @@ import OwnerTransactions from './OwnerTransactions';
 import OwnerRecords from './OwnerRecords';
 import OwnerInformation from './OwnerInformation';
 
-function OwnerMenu({route}){
+function OwnerMenu({route,navigation}){
     const [user, setUser] = useState([]);
     const [record, setRecord] = useState([]);
     const {category}=route.params
@@ -37,6 +37,10 @@ function OwnerMenu({route}){
       })
     }
 
+    function Notification(id){
+      navigation.navigate("Owner Notification",{id:id})
+    }
+
     const Tab = createBottomTabNavigator();
     console.log(user)
     console.log(record)
@@ -44,7 +48,7 @@ function OwnerMenu({route}){
       <Header
       backgroundColor='rgb(134, 193, 217)'
       leftComponent={{text:"HealthBridge",style:{width:200,fontSize:30,fontWeight: 'bold'}}}
-      rightComponent={{ icon:"notifications",size:30 }}
+      rightComponent={{ icon:"notifications",size:30 ,onPress: () => Notification(id)}}
       />
 
         <Tab.Navigator screenOptions={({ route }) => ({
@@ -90,8 +94,6 @@ function OwnerMenu({route}){
           <Tab.Screen 
           name="Transactions" 
           options={{tabBarLabelStyle: {
-            activeTintColor: "black",
-				    inactiveTintColor: "gray",
             fontSize: 12,
             fontWeight: "bold",
             }

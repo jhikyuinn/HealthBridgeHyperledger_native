@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 
-function Prediction() {
+function OwnerPrediction() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Prediction</Text>
@@ -8,4 +8,4 @@ function Prediction() {
     );
   }
   
-  export default Prediction;
+  export default OwnerPrediction;

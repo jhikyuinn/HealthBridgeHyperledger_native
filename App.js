@@ -8,6 +8,8 @@ import Main from './screens/Main';
 import OwnerMenu from './screens/owner/OwnerMenu';
 import UserMenu from './screens/user/UserMenu';
 import SourcesMenu from './screens/sources/SourcesMenu';
+import OwnerNotification from './screens/owner/OwnerNotification'
+import OwnerRequestRecordsDetails from './screens/owner/OwnerRequestRecordsDetails'
 import OwnerRecordsDetails from './screens/owner/OwnerRecordsDetails';
 
 export default function App() {
@@ -20,6 +22,8 @@ export default function App() {
       <Stack.Screen name="Main" component={Main} ></Stack.Screen>
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Owner Notification" component={OwnerNotification}/>
+      <Stack.Screen name="Owner Request Records Details" component={OwnerRequestRecordsDetails}/>
       <Stack.Screen name="Owner Records Details" component={OwnerRecordsDetails}/>
       <Stack.Screen
           name="OwnerMenu"
