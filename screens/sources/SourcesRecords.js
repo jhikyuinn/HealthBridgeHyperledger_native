@@ -3,11 +3,22 @@ import AuroraButton from '../../components/AuroraButton';
 import axios from 'axios'
 import { Text, View , StyleSheet,ScrollView} from 'react-native';
 
-function SourcesRecords({user, record}) {
+function SourcesRecords({user,record,center,navigation}) {
+  console.log(user)
+  console.log(center)
+
+ 
 
   
  
     return (
+      <>
+      <View style={styles.info}>
+          {center ? <Text style={{fontSize:20}}>{center.name}</Text>: <></>}
+          {center ? <Text style={{fontSize:20}}>{center.address[0].line[0]}</Text> : <></>}
+          {center ? <Text style={{fontSize:20}}>{center.telecom[0].value}</Text> : <></>}
+
+      </View>
       <ScrollView >
        {record.map((item,index)=>(
         <View style={styles.input} key={item.resource.id}>
@@ -33,14 +44,24 @@ function SourcesRecords({user, record}) {
       
       
     </ScrollView>
+    </>
     );
   }
   
   export default SourcesRecords;
 
   const styles = StyleSheet.create({
-    input: {
+    info: {
       marginTop:20,
+      height: 130,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      borderRadius:10,
+      backgroundColor:"#fff",
+    },
+    input: {
+      marginBottom:20,
       height: 160,
       margin: 12,
       borderWidth: 1,

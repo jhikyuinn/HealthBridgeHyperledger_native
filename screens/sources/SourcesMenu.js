@@ -10,6 +10,7 @@ import SourcesInformation from "./SourcesInformation"
 
 function SourcesMenu({route}){
     const [user, setUser] = useState([]);
+    const [center, setCenter] = useState();
     const [record, setRecord] = useState([]);
     const {category}=route.params
     const {id}=route.params
@@ -22,6 +23,9 @@ function SourcesMenu({route}){
         let temp = [];
         await axios.get(`http://203.247.240.226:22650/api/query/${id}`).then((res) => {
         setUser(res.data)
+        axios.get(`http://203.247.240.226:8080/fhir/Organization/${id}`).then((res) => {
+        setCenter(res.data);
+    })
         axios.get(`http://203.247.240.226:8080/fhir/Patient?organization=${id}`).then((res) => {
           for(const item of res.data.entry) {
             if(item.resource.meta.tag  == undefined) {
@@ -65,7 +69,7 @@ function SourcesMenu({route}){
         }
       }
         )}>
-          <Tab.Screen name="Records" children={({navigation})=><SourcesRecords user={user} record={record} navigation={navigation}/>} />
+          <Tab.Screen name="Records" children={({navigation})=><SourcesRecords user={user} center={center}record={record} navigation={navigation}/>} />
           <Tab.Screen name="Send PHR" children={({navigation})=><SourcesSendPHR user={user} navigation={navigation}/>} />
           <Tab.Screen name="Information" children={({navigation})=><SourcesInformation user={user} navigation={navigation}/>}  />
       </Tab.Navigator>

@@ -12,9 +12,9 @@ function OwnerNotification({route,navigation}) {
     async function getRequestRecordsview(sender){
     await axios.get(`http://203.247.240.226:8080/fhir/Patient/HB1206`).then((res) => {
       console.log(res.data);
-      sendReuestRecordDetails(sender,res.data)
+      sendRequestRecordDetails(sender,res.data)
     })
-      function sendReuestRecordDetails(sender,data){
+      function sendRequestRecordDetails(sender,data){
       navigation.navigate("Owner Request Records Details",{sender:sender,data:data})
     
 

@@ -9,7 +9,7 @@ import UserTransactions from "./UserTransactions"
 import UserInformation from "./UserInformation"
 import UserRequestPHR from './UserRequestPHR';
 
-function UserMenu({route}){
+function UserMenu({route,navigation}){
     const [user, setUser] = useState([]);
     const [record, setRecord] = useState([]);
     const {category}=route.params
@@ -34,6 +34,9 @@ function UserMenu({route}){
           setRecord(temp);
         })
     }
+    function Notification(id){
+      navigation.navigate("User Notification",{id:id})
+    }
 
     const Tab = createBottomTabNavigator();
     console.log(user)
@@ -43,7 +46,7 @@ function UserMenu({route}){
       <Header
       backgroundColor='rgb(134, 193, 217)'
       leftComponent={{text:"HealthBridge",style:{width:200,fontSize:25,fontWeight: 'bold'}}}
-      rightComponent={{ icon:"notifications" }}
+      rightComponent={{ icon:"notifications" ,onPress: () => Notification(id)}}
       />
 
       <Tab.Navigator screenOptions={({ route }) => ({

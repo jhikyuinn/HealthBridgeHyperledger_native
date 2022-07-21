@@ -16,7 +16,7 @@ function OwnerRecordsDetails({route,navigation}) {
     return (
         <ScrollView>
         <View style={styles.input}>
-            <Text style={styles.textsize}>PID: <TextInput style={styles.textinput} type="text" placeholder={data.id} name="data.id" value={data.id}/></Text>
+            <Text style={styles.textsize}>PID: {data.id}</Text>
             <Text style={styles.textsize}>Name: {data.name[0].text}</Text>
             <Text style={styles.textsize}>Age: {data.extension[4].valueString}</Text>
             <Text style={styles.textsize}>Gender: {data.gender} </Text>
