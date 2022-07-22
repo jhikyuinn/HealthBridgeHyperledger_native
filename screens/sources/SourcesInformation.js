@@ -11,6 +11,7 @@ function SourcesInformation({user,navigation}) {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>User Information</Text>
         <Text>AccountID: {user.AccountID}</Text>
+        <Text>Organization: {user.Organization}</Text>
         <Text>Name: {user.patientName}</Text>
         <Text>Phone Number: {user.phonenumber}</Text>
         <Text>Account Balance: {user.checkingBalance}</Text>

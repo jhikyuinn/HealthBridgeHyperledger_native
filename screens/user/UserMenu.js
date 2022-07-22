@@ -23,8 +23,8 @@ function UserMenu({route,navigation}){
         let temp = [];
         await axios.get(`http://203.247.240.226:22650/api/query/${id}`).then((res) => {
         setUser(res.data)
-    })
-        await axios.get(`http://203.247.240.226:8080/fhir/Patient?organization=INLab&general-practitioner=${id}`).then((res) => {
+        console.log(res.data)
+        axios.get(`http://203.247.240.226:8080/fhir/Patient?organization=INLab&general-practitioner=${res.data.patientName}`).then((res) => {
           for(const item of res.data.entry) {
             if(item.resource.meta.tag  == undefined) {
                 temp.push(item);
@@ -33,6 +33,7 @@ function UserMenu({route,navigation}){
           console.log(temp)
           setRecord(temp);
         })
+      })
     }
     function Notification(id){
       navigation.navigate("User Notification",{id:id})
