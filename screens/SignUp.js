@@ -24,10 +24,10 @@ const SignUp = ({route,navigation})=>{
         confirmPassword:"",
     })
 
-    const onChangeHandler = (e) => {
+    const onChangeHandler = (keyvalue,e) => {
         setUsercreate({
             ...usercreate,
-            [e.target.placeholder]: e.target.value,
+            [keyvalue]: e,
         })
 
     }
@@ -85,13 +85,13 @@ const SignUp = ({route,navigation})=>{
                       </View>
                             <View style={{width:'80%',marginBottom:20}}>
                                 <Text style={{color:'#fff',fontSize:40,marginTop:10,marginBottom:30}}>First Visit {category}</Text> 
-                                <TextInput name="PersonName" value={usercreate.PersonName} onChange={onChangeHandler} style={styles.firstitem} placeholderTextColor="#fff" placeholder="PersonName" />  
-                                <TextInput name="AccountID" value={usercreate.AccountID} onChange={onChangeHandler} style={styles.otheritem} placeholderTextColor="#fff" placeholder="AccountID" /> 
-                                <TextInput name="phonenumber" value={usercreate.phonenumber} onChange={onChangeHandler} style={styles.otheritem} placeholderTextColor="#fff" placeholder="phonenumber" />
-                                <TextInput name="password" value={usercreate.password} onChange={onChangeHandler} secureTextEntry={true} style={styles.otheritem} placeholderTextColor="#fff" placeholder="password" />
-                                <TextInput name="confirmPassword" value={usercreate.confirmPassword} onChange={onChangeHandler} secureTextEntry={true} style={styles.otheritem} placeholderTextColor="#fff" placeholder="confirmPassword" />  
+                                <TextInput name="PersonName" value={usercreate.PersonName} onChangeText={(e) => onChangeHandler("PersonName", e)} style={styles.firstitem} placeholderTextColor="#fff" placeholder="PersonName" />  
+                                <TextInput name="AccountID" value={usercreate.AccountID} onChangeText={(e) => onChangeHandler("AccountID", e)} style={styles.otheritem} placeholderTextColor="#fff" placeholder="AccountID" /> 
+                                <TextInput name="phonenumber" value={usercreate.phonenumber} onChangeText={(e) => onChangeHandler("phonenumber", e)} style={styles.otheritem} placeholderTextColor="#fff" placeholder="phonenumber" />
+                                <TextInput name="password" value={usercreate.password} onChangeText={(e) => onChangeHandler("password", e)} secureTextEntry={true} style={styles.otheritem} placeholderTextColor="#fff" placeholder="password" />
+                                <TextInput name="confirmPassword" value={usercreate.confirmPassword} onChangeText={(e) => onChangeHandler("confirmPassword", e)} secureTextEntry={true} style={styles.otheritem} placeholderTextColor="#fff" placeholder="confirmPassword" />  
                             </View>
-                            <AuroraButton buttonFunction={()=>validate()} widthsize="80%" heightsize="8%" bgcolor="white" text="Create Account" color={"black"} outline={false}/>
+                            <AuroraButton buttonFunction={()=>validate()} width="80%" height="10%" bgcolor="white" text="Create Account" color={"black"} outline={false}/>
                     </View>
                 </ScrollView>
             </View>

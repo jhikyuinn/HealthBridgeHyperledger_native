@@ -31,7 +31,7 @@ function Main({route,navigation}) {
   const styles = StyleSheet.create({
     firstcontainer: {
         resizeMode:"stretch",
-        flex: 3,
+        flex: 4,
         flexDirection: 'row',
         backgroundColor:"white"
     },

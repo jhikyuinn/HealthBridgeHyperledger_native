@@ -6,10 +6,11 @@ import {useState} from 'react'
 import AuroraButton from '../../components/AuroraButton';
 
 function SourcesSendPHR({user,center,navigation}) {
+  const BASE_URL = "http://203.247.240.226:8080/fhir"
 
   const [formData, setFormData] = useState({
     pid: "",
-    assigner: center.id,
+    assigner: "",
     name: "",
     age: "",
     telecome: {
@@ -32,7 +33,7 @@ function SourcesSendPHR({user,center,navigation}) {
 });
 
 const sendPHR = async () => {
-  axios.put(`http://203.247.240.226:8080/fhir/Patient/${formData.pid}`, {
+  await axios.put(`${BASE_URL}/Patient/${formData.pid}`, {
      "resourceType": "Patient",
      "id": formData.pid,
      "text": {
@@ -212,38 +213,36 @@ const postOnChain = async () => {
   }).then(console.log);
 }
 
-const telChangeHandler = (e) => {
+const telChangeHandler = (keyvalue,e) => {
+  console.log(e)
   setFormData({
       ...formData,
       telecome: {
           ...formData.telecome,
-          [e.target.name]: e.target.value,
+          [keyvalue]: e,
       }
   })
 }
 
-const conChangeHandler = (e) => {
+const conChangeHandler = (keyvalue,e) => {
   console.log(e)
   setFormData({
       ...formData,
       contact: {
           ...formData.contact,
-          [e.nativeEvent.value]: e.target.value,
+          [keyvalue]: e,
       }
   })
   console.log(formData)
 }
 
 const changeHandler = (keyvalue,e) => {
-  console.log(keyvalue)
   console.log(e)
-  
-    console.log(name)
   const date = new Date().toLocaleString();
   setFormData({
       ...formData,
       createdAt: date,
-      [keyvalue]: e.nativeEvent.data,
+      [keyvalue]: e
   })
   console.log(formData)
 }
@@ -287,65 +286,65 @@ const onClickSendHandler = async() => {
     return (
       <>
           <ScrollView>
-            <View controlId="pid" style={styles.container}>
+            <View style={styles.container}>
               <Text style={{fontSize:20}}> PID:  </Text>
-              <TextInput style={styles.input} type="text" placeholder="Enter" id="pid" name="pid" value={formData.pid} onChange={(e) => changeHandler("pid", e)}/>
+              <TextInput style={styles.input} type="text" placeholder="Enter" name="pid" value={formData.pid} onChangeText={(e) => changeHandler("pid", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Name:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter name" name="name" value={formData.name} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter name" name="name" value={formData.name} onChangeText={(e) => changeHandler("name", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Age:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter age" name="age" value={formData.age} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter age" name="age" value={formData.age} onChangeText={(e) => changeHandler("age", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Gender:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter gender" name="gender" value={formData.gender} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter gender" name="gender" value={formData.gender} onChangeText={(e) => changeHandler("gender", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Mobile phone:  </Text>
-              <TextInput  style={styles.input}  type="text" placeholder="Enter your phone number" name="myPhone" value={formData.telecome.myPhone} onChange={telChangeHandler}/>
+              <TextInput  style={styles.input}  type="text" placeholder="Enter your phone number" name="myPhone" value={formData.telecome.myPhone} onChangeText={(e) => telChangeHandler("myPhone", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Address:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter your home address" name="address" value={formData.address} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter your home address" name="address" value={formData.address} onChangeText={(e) => changeHandler("address", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Relationship:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Relationship with patient" name="relationship" value={formData.contact.relationship} onChange={conChangeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Relationship with patient" name="relationship" value={formData.contact.relationship} onChangeText={(e) => conChangeHandler("relationship", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Name:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter name" name="name" value={formData.contact.name} onChange={conChangeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter name" name="name" value={formData.contact.name} onChangeText={(e) => conChangeHandler("name", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Gender:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter gender" name="gender" value={formData.contact.gender} onChange={conChangeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter gender" name="gender" value={formData.contact.gender} onChangeText={(e) => conChangeHandler("gender", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Mobile phone:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter contact phone number" name="phone" value={formData.contact.phone} onChange={conChangeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter contact phone number" name="phone" value={formData.contact.phone} onChangeText={(e) => conChangeHandler("phone", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Address:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter contact address" name="address" value={formData.contact.address} onChange={conChangeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter contact address" name="address" value={formData.contact.address} onChangeText={(e) => conChangeHandler("address", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Symptom:  </Text>
-              <TextInput  style={styles.input} type="text" placeholder="Enter symptom" name="symptom" value={formData.symptom} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text" placeholder="Enter symptom" name="symptom" value={formData.symptom} onChangeText={(e) => changeHandler("symptom", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Adding comment:  </Text>
-              <TextInput  style={styles.input} type="text" name="comment" value={formData.comment} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text" name="comment" value={formData.comment} onChangeText={(e) => changeHandler("comment", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Assigner:  </Text>
-              <TextInput  style={styles.input} type="text"  name="assigner" value={formData.assigner} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text"  name="assigner" value={formData.assigner} onChangeText={(e) => changeHandler("assigner", e)}/>
             </View>
             <View style={styles.container}>
               <Text style={{fontSize:20}}> Doctor:  </Text>
-              <TextInput  style={styles.input} type="text"  name="doctorName" value={formData.doctorName} onChange={changeHandler}/>
+              <TextInput  style={styles.input} type="text"  name="doctorName" value={formData.doctorName} onChangeText={(e) => changeHandler("doctorName", e)}/>
             </View>
             <View style={{justifyContent:'center',alignItems: 'center'}}>
             <AuroraButton  text="View" buttonFunction={() => onClickSendHandler()} width={300} height={40} bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />

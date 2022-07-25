@@ -12,6 +12,7 @@ import OwnerNotification from './screens/owner/OwnerNotification'
 import OwnerRequestRecordsDetails from './screens/owner/OwnerRequestRecordsDetails'
 import OwnerRecordsDetails from './screens/owner/OwnerRecordsDetails';
 import UserNotification from './screens/user/UserNotification'
+import UserResponsePayment from './screens/user/UserResponsePayment';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -26,6 +27,7 @@ export default function App() {
       <Stack.Screen name="Owner Notification" component={OwnerNotification}/>
       <Stack.Screen name="Owner Request Records Details" component={OwnerRequestRecordsDetails}/>
       <Stack.Screen name="User Notification" component={UserNotification}/>
+      <Stack.Screen name="User Response Payment" component={UserResponsePayment}/>
       <Stack.Screen name="Owner Records Details" component={OwnerRecordsDetails}/>
       <Stack.Screen
           name="OwnerMenu"
