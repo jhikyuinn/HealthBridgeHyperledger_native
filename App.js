@@ -13,6 +13,7 @@ import OwnerRequestRecordsDetails from './screens/owner/OwnerRequestRecordsDetai
 import OwnerRecordsDetails from './screens/owner/OwnerRecordsDetails';
 import UserNotification from './screens/user/UserNotification'
 import UserResponsePayment from './screens/user/UserResponsePayment';
+import UserRequestDetails from './screens/user/UserRequestDetails'
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ export default function App() {
       <Stack.Screen name="Owner Request Records Details" component={OwnerRequestRecordsDetails}/>
       <Stack.Screen name="User Notification" component={UserNotification}/>
       <Stack.Screen name="User Response Payment" component={UserResponsePayment}/>
+      <Stack.Screen name="User Request Details" component={UserRequestDetails}/>
       <Stack.Screen name="Owner Records Details" component={OwnerRecordsDetails}/>
       <Stack.Screen
           name="OwnerMenu"
