@@ -35,7 +35,7 @@ function OwnerRecords({user, record,navigation}) {
           Doctor: {item.resource.extension[2].valueString}
         </Text>
         <Text>
-          Symptom: {item.resource.extension[index].valueString}
+          Symptom: {item.resource.extension[0].valueString}
         </Text>
         <Text>
           Create Time: {item.resource.extension[5] ? item.resource.extension[5].valueString : <></>}

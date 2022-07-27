@@ -8,10 +8,12 @@ function UserRequestPHR({user, record,navigation}) {
     const [request, setRequest] = useState({
         req:undefined,
     });
+
     const [patient, setPatient] = useState({
         name: "",
         phone: "",
     });
+
     const [resultList, setResultList] = useState();
 
     async function getRequest(word) {
@@ -32,23 +34,17 @@ function UserRequestPHR({user, record,navigation}) {
         })
     }
 
-    const getPatientInfo = async (item) => {
-        console.log(item)
-        await axios.get(`http://203.247.240.226:8080/fhir/${item.resource.subject.reference}`).then((res) => {
-            if(res.data.name[0] !== undefined) {
-                setPatient({
-                    ...patient,
-                    name: res.data.name[0].text,
-                    phone: res.data.telecom[0].value
-                })
-            }
+    function getPatientInfo(info){
+        console.log(info)
+        axios.get(`http://203.247.240.226:8080/fhir/${info}`).then((res) => {
+            console.log(res.data.id)
+            console.log(res.data.telecom[0].value)
+            console.log(res.data.extension[0].valueString)
+            navigation.navigate("User Request Details",{id:res.data.id, phone: res.data.telecom[0].value,doctor:res.data.extension[2].valueString})
         })
-        navigation.navigate("User Request Details",{item:patient})
-    }
+        }
 
-    function Requestrecord(item){
-        getPatientInfo(item)
-    }
+    
  
     return (
     <View>
@@ -65,7 +61,7 @@ function UserRequestPHR({user, record,navigation}) {
                     <Text>Doctor: {item.resource.extension[0] && item.resource.extension[0].valueString}</Text>
                     <Text>Assigner: {item.resource.extension[1] && item.resource.extension[1].valueString}</Text>
                     <Text>Created At: {item.resource.extension[2] && item.resource.extension[2].valueString}</Text>
-                    <AuroraButton buttonFunction={()=>Requestrecord(item)} width="30%" height="25%" bgcolor="rgb(134, 193, 217)" text="Request" color={"black"} outline={false}/>
+                    <AuroraButton buttonFunction={()=>getPatientInfo(item.resource.subject.reference)} width="30%" height="25%" bgcolor="rgb(134, 193, 217)" text="Request" color={"black"} outline={false}/>
                 </View>  
         )}
         )}

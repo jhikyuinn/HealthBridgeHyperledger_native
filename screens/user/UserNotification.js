@@ -12,7 +12,7 @@ function UserNotification({route,navigation}) {
     }
 
     async function getResponseRecordsview(id,receiver){
-      navigation.navigate('User Response Payment',{id:id,receiver})
+      navigation.navigate('User Response Payment',{id:id,receiver:receiver})
 
     }
     return (

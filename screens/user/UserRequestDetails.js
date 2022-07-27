@@ -1,41 +1,43 @@
-import { Text, View } from 'react-native';
 
-function UserRequestDetails({item,navigation}) {
-    console.log(item)
+import {Text, View,StyleSheet} from 'react-native';
+import AuroraButton from '../../components/AuroraButton';
+import { useState, useRef } from 'react'
+import axios from 'axios'
+import Checkbox from 'expo-checkbox';
+import { TextInput } from 'react-native-gesture-handler';
+
+
+function UserRequestDetails({route,navigation}) {
+   const {id}=route.params
+   const {phone}=route.params
+   const {doctor}=route.params
 
     const initialState = {
-        PID: false,
-        Name: false,
+        PID: true,
+        Name: true,
         Age: false,
         Gender: false,
         MobilePhone: false,
         Address: false,
-        Symptoms: false,
+        Symptoms: true,
         AddingComment: false,
-        Assigner: false,
-        DoctorName: false,
-      };
+        Assigner: true,
+        DoctorName: true,
+    };
 
-    
-    const [request, setRequest] = useState({
-        EHRNumber: item.resource.id,
-        amount: "",
-        doctor: item.resource.extension[0].valueString,
-        phoneNumber: phone
-    });
+    const [amount,setAmount]= useState({});
 
     const requestHandler = async () => {
+        console.log(id,amount,doctor,phone)
         await axios.put(`http://203.247.240.226:22650/api/requestPHR`, {
-            "EHRNumber" : request.EHRNumber, 
-            "maxtoken": request.amount, 
-            "doctor": request.doctor, 
+            "EHRNumber" : id, 
+            "maxtoken": amount, 
+            "doctor": doctor, 
             "data": "all",
             "phonenumber" : phone
         }).then((res) => {
             console.log(res);
         })
-
-        closeHandler();
         setRequest({
             EHRNumber: "",
             amount: "",
@@ -44,61 +46,139 @@ function UserRequestDetails({item,navigation}) {
         })
     }
 
-    const changeHandler = (e) => {
-        setRequest({
-            ...request,
-            [e.target.name] : e.target.value
-        })
-        console.log(request);
+    const onChangeHandler = (e) => {
+        console.log(e)
+        setAmount(e)
     }
-  
+
+    function Closerequest(){
+        navigation.navigate("Request PHR")
+    }
+
     return (
-      <View><div className="request_modal">
-      <Modal show={show} onHide={closeHandler} centered>
-          <Modal.Header closeButton>
-              <Modal.Title>Request PHR</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-              <div className='user_name'><h5>Patient Name: {name}</h5></div>
-              <Form>
-                  <div className='check_col'>
-                      {checks.map((item, key) => {
-                          return (<Form.Check 
-                              inline
-                              label={item}
-                              type="checkbox"
-                              name="PHRdata"
-                              id={item}
-                              key={key}
-                          />)
-                      })}
-                  </div>
-                  <div className='modal_amount'>
-                      <Form.Group className="mb-3" controlId="amount">
-                      <Form.Label>Amount payable</Form.Label>
-                      <Form.Control
-                          type="number"
-                          placeholder="amount HBT"
-                          name='amount'
-                          value={request.amount}
-                          autoFocus
-                          onChange={changeHandler}
-                      />
-                      </Form.Group>
-                  </div>
-              </Form>
-          </Modal.Body>
-          <Modal.Footer>
-              <Button variant="secondary" onClick={closeHandler}>
-                  Close
-              </Button>
-              <Button variant="primary" onClick={requestHandler}>
-                  Request
-              </Button>
-          </Modal.Footer>
-      </Modal>
-  </div></View>
-    );
-  }
-  
-  export default UserRequestDetails;
+        <>
+    <View style={styles.input}>
+        <Text style={styles.textsize}> Request PHR to {id}</Text>
+        <Text style={styles.textsize}></Text>
+        <Text style={styles.textsize}>Information</Text>
+        <View style={styles.checkcontainer}>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.PID}/>
+            <Text> PID   </Text>
+            </View>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.Name}/>
+            <Text> Name   </Text>
+            </View>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.Symptoms}/>
+            <Text> Symptoms   </Text>
+            </View>            
+        </View>
+        <View style={styles.checkcontainer}>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.Assigner}/>
+            <Text> Assigner   </Text>
+            </View>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.DoctorName}/>
+            <Text> Doctor Name  </Text>
+            </View>
+            
+        </View>
+
+        <View style={styles.checkcontainer}>
+        <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.Age}/>
+            <Text> Age   </Text>
+            </View>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.Gender}/>
+            <Text> Gender   </Text>
+            </View>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.MobilePhone}/>
+            <Text> Mobile Phone   </Text>
+            </View>
+        </View>
+
+        <View style={styles.checkcontainer}>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.Address}/>
+            <Text> Address   </Text>
+            </View>
+            <View style={styles.checkboxWrapper}>
+            <Checkbox value={initialState.AddingComment}/>
+            <Text> Adding Comment   </Text>
+            </View>
+            </View>
+       
+
+       <View style={styles.smallcontainer}>
+        <Text style={styles.textsize}>HBT recommended : </Text>
+        <TextInput style={styles.Textinput} onChangeText={(e) => onChangeHandler(e)}/>
+        </View>
+    </View> 
+
+        <View style={styles.container}>
+        <AuroraButton text="Close" buttonFunction={() => Closerequest()} width="35%" height="12%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
+        <AuroraButton text="Send Request"  buttonFunction={() => requestHandler()} width="35%" height="12%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
+        </View>
+
+    </>
+    )
+}
+
+export default UserRequestDetails;
+
+const styles = StyleSheet.create({
+    input: {
+      marginTop:20,
+      height: 400,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      borderRadius:10,
+      backgroundColor:"#fff",
+    },
+    Textinput: {
+        width:"40%",
+        height:40,
+        marginTop: 12,
+        marginRight:10,
+        borderWidth: 1,
+        padding: 10,
+      },
+    textsize:{
+        fontSize: 20
+    },
+    checkcontainer:{
+        margin: "1%",
+        width:"80%",
+        height: 20,
+        flex: 1,
+        flexDirection:"row"
+    }, 
+    smallcontainer:{
+        margin: "2%",
+        width:"100%",
+        height: 50,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: 'center',
+        flexDirection:"row"
+    }, 
+    container:{
+        margin: "2%",
+        width:"100%",
+        height: 50,
+        flex: 1,
+        justifyContent: "center",
+        flexDirection:"row"
+    }, 
+    checkboxWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 5,
+      },
+  });

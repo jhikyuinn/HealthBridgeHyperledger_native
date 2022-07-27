@@ -58,7 +58,7 @@ export default OwnerRequestRecordsDetails;
 const styles = StyleSheet.create({
     input: {
       marginTop:20,
-      height: 400,
+      height: 420,
       margin: 12,
       borderWidth: 1,
       padding: 10,

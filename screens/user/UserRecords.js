@@ -36,7 +36,7 @@ function UserRecords({record}) {
   const styles = StyleSheet.create({
     input: {
       marginTop:20,
-      height: 120,
+      height: 130,
       margin: 12,
       borderWidth: 1,
       padding: 10,
