@@ -30,7 +30,7 @@ function UserRequestDetails({route,navigation}) {
     const requestHandler = async () => {
         console.log(id,amount,doctor,phone)
         await axios.put(`http://203.247.240.226:22650/api/requestPHR`, {
-            "EHRNumber" : id, 
+            "EHRNumber" : "EHR1206", 
             "maxtoken": amount, 
             "doctor": doctor, 
             "data": "all",

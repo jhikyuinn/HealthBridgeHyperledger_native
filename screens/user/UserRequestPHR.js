@@ -9,11 +9,6 @@ function UserRequestPHR({user, record,navigation}) {
         req:undefined,
     });
 
-    const [patient, setPatient] = useState({
-        name: "",
-        phone: "",
-    });
-
     const [resultList, setResultList] = useState();
 
     async function getRequest(word) {
@@ -39,7 +34,7 @@ function UserRequestPHR({user, record,navigation}) {
         axios.get(`http://203.247.240.226:8080/fhir/${info}`).then((res) => {
             console.log(res.data.id)
             console.log(res.data.telecom[0].value)
-            console.log(res.data.extension[0].valueString)
+            console.log(res.data.extension[2].valueString)
             navigation.navigate("User Request Details",{id:res.data.id, phone: res.data.telecom[0].value,doctor:res.data.extension[2].valueString})
         })
         }
@@ -54,6 +49,7 @@ function UserRequestPHR({user, record,navigation}) {
         </View>
         <ScrollView>
         {resultList && resultList.map((item, index) => {
+            console.log(item)
             return (
                 <View style={styles.Textinput}>
                     <Text>PID: {item.resource.id}</Text>

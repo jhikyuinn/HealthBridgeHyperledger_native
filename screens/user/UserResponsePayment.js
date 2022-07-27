@@ -1,4 +1,4 @@
-import {Text, View,StyleSheet} from 'react-native';
+import {Text, View,StyleSheet,TextInput} from 'react-native';
 import AuroraButton from '../../components/AuroraButton';
 import { useState, useRef } from 'react'
 import axios from 'axios'
@@ -8,6 +8,7 @@ import Checkbox from 'expo-checkbox';
 function UserResponsePayment({route,navigation}) {
     const {id} = route.params;
     const {receiver} =route.params;
+    console.log(id,receiver)
 
     const initialState = {
         PID: true,
@@ -25,14 +26,16 @@ function UserResponsePayment({route,navigation}) {
     const [txInfo, setTxInfo] = useState({
         senderName: id,
         receiverName: receiver,
-        amount: 100,
+        Amount: amount,
     });
+
+    const [amount,setAmount]= useState([]);
 
     async function RequestPayment(){
         await axios.post(`http://203.247.240.226:22650/api/sendPayment`, {
             "SenderName": txInfo.senderName,
             "ReceiverName": txInfo.receiverName,
-            "Price": txInfo.amount
+            "Price": amount
         }).then((res) => {
             console.log(res);
         })
@@ -40,6 +43,11 @@ function UserResponsePayment({route,navigation}) {
 
     function Closerequest(id){
         navigation.navigate("User Notification",{id:id})
+    }
+
+    const onChangeHandler = (e) => {
+        console.log(e)
+        setAmount(e)
     }
 
     return (
@@ -99,6 +107,11 @@ function UserResponsePayment({route,navigation}) {
        
         <Text style={styles.textsize}>Sender Name : {id}</Text>
         <Text style={styles.textsize}>Receiver Name : {receiver}</Text>
+
+        <View style={styles.smallcontainer}>
+        <Text style={styles.textsize}>HBT recommended : </Text>
+        <TextInput style={styles.Textinput} onChangeText={(e) => onChangeHandler(e)}/>
+        </View>
     </View> 
 
         <View style={styles.container}>
@@ -130,6 +143,15 @@ const styles = StyleSheet.create({
         width:"80%",
         height: 20,
         flex: 1,
+        flexDirection:"row"
+    }, 
+    smallcontainer:{
+        margin: "2%",
+        width:"100%",
+        height: 50,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: 'center',
         flexDirection:"row"
     }, 
     container:{
