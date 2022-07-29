@@ -20,6 +20,7 @@ function UserEditProfile({route,navigation}) {
             "phonenumber": editInfo.phonenumber,
         }).then((res) => {
             console.log(res);
+            windoq.alert("Successful Edit")
         })
     }
     

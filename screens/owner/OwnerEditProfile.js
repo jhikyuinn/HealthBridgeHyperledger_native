@@ -14,13 +14,13 @@ function OwnerEditProfile({route,navigation}) {
     });
   
     async function EditProfile(){
-        console.log(user.AccountID,editInfo.patientName,editInfo.phonenumber)
         await axios.post(`http://203.247.240.226:22650/api/update`, {
             "EHRNumber":user.AccountID,
             "patientName": editInfo.patientName,
             "phonenumber": editInfo.phonenumber,
         }).then((res) => {
             console.log(res);
+            window.alert("Successful Edit")
         })
     }
     

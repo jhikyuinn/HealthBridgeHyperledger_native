@@ -20,6 +20,7 @@ function SourcesEditProfile({route,navigation}) {
             "phonenumber": editInfo.phonenumber,
         }).then((res) => {
             console.log(res);
+            window.alert("Successful Edit")
         })
     }
     

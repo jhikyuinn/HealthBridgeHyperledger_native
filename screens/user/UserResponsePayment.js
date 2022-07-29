@@ -38,6 +38,7 @@ function UserResponsePayment({route,navigation}) {
             "Price": amount
         }).then((res) => {
             console.log(res);
+            window.alert("Successful payment")
         })
     }
 
@@ -166,5 +167,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 5,
+      },
+      Textinput: {
+        width:"40%",
+        height:40,
+        marginTop: 12,
+        marginRight:10,
+        borderWidth: 1,
+        padding: 10,
       },
   });

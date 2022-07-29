@@ -17,6 +17,7 @@ function OwnerChargeBalance({route,navigation}) {
             "chargeamount": amount,
         }).then((res) => {
             console.log(res);
+            window.alert("Successful Charge")
         })
     }
     

@@ -28,7 +28,7 @@ function UserNotification({route,navigation}) {
         <AuroraButton text="View" buttonFunction={() => getResponseRecordsview(id, "EHR1206")} width="20%" height="40%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
         </View>
         <View style={styles.input}>
-        <Text style={styles.textsize}>PID:  response ok</Text>
+        <Text style={styles.textsize}>PID: EHR11 response ok</Text>
         <AuroraButton text="View" buttonFunction={() => getResponseRecordsview()} width="20%" height="40%" bgcolor="rgb(134, 193, 217)" color={"black"} outline={false} />
       </View>
       </ScrollView>

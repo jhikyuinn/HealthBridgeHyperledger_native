@@ -37,6 +37,7 @@ function UserRequestDetails({route,navigation}) {
             "phonenumber" : phone
         }).then((res) => {
             console.log(res);
+            window.alert("Successful request")
         })
         setRequest({
             EHRNumber: "",
